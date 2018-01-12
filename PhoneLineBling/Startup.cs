@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PhoneLineBling.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace PhoneLineBling
 {
@@ -21,6 +23,12 @@ namespace PhoneLineBling
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // requires
+            // using PhoneLineBling.Models;
+            // using Microsoft.EntityFrameworkCore;
+
+            services.AddDbContext<CustomerContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("CustomerContext")));
             services.AddMvc();
         }
 
