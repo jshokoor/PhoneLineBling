@@ -14,5 +14,6 @@ namespace PhoneLineBling.Models
         }
 
         public DbSet<Customer> Customer { get; set; }
+        public DbSet<Schedule> Schedule { get; set; }
     }
 }
