@@ -10,6 +10,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using PhoneLineBling.Data;
 
 namespace PhoneLineBling
 {
@@ -30,6 +31,9 @@ namespace PhoneLineBling
                     context.Database.Migrate();
                     // requires using PhoneLineBling.Models;
                     SeedData.Initialize(services);
+
+                    var hotlineContext = services.GetRequiredService<HotlineContext>();
+                    DbInitializer.Initialize(hotlineContext);
                 }
                 catch (Exception ex)
                 {

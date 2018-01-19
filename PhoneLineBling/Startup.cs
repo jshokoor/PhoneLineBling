@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PhoneLineBling.Models;
 using Microsoft.EntityFrameworkCore;
+using PhoneLineBling.Data;
 
 namespace PhoneLineBling
 {
@@ -29,6 +30,10 @@ namespace PhoneLineBling
 
             services.AddDbContext<CustomerContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("CustomerContext")));
+
+            services.AddDbContext<HotlineContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddMvc();
         }
 
