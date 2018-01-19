@@ -12,11 +12,11 @@ namespace PhoneLineBling.Models
     public class Fetish
     {
         public int FetishID { get; set; }
-        public int CategoryID { get; set; }
+        public int SubscriptionID { get; set; }
         public int CustomerID { get; set; }
         public Rank? Rank { get; set; }
 
-        public Category Category { get; set; }
+        public Subscription Subscription { get; set; }
         public Customer Customer { get; set; }
     }
 }

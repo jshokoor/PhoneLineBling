@@ -34,31 +34,31 @@ namespace PhoneLineBling.Data
             }
             context.SaveChanges();
 
-            var categories = new Category[]
+            var subscriptions = new Subscription[]
             {
-                new Category{CategoryID=1, Title="Look back at it"},
-                new Category{CategoryID=2, Title="Melons"},
-                new Category{CategoryID=3, Title="Game of thrones"},
-                new Category{CategoryID=4, Title="Far East"},
-                new Category{CategoryID=5, Title="Role Play"}
+                new Subscription{SubscriptionID=1, Title="Look back at it"},
+                new Subscription{SubscriptionID=2, Title="Melons"},
+                new Subscription{SubscriptionID=3, Title="Game of thrones"},
+                new Subscription{SubscriptionID=4, Title="Far East"},
+                new Subscription{SubscriptionID=5, Title="Role Play"}
             };
-            foreach (Category c in categories)
+            foreach (Subscription c in subscriptions)
             {
-                context.Categories.Add(c);
+                context.Subscriptions.Add(c);
             }
             context.SaveChanges();
 
             var fetishes = new Fetish[]
             {
-                new Fetish{CustomerID=1, CategoryID=4, Rank=Rank.A},
-                new Fetish{CustomerID=1, CategoryID=3, Rank=Rank.B},
-                new Fetish{CustomerID=2, CategoryID=3, Rank=Rank.A},
-                new Fetish{CustomerID=3, CategoryID=1, Rank=Rank.A},
-                new Fetish{CustomerID=4, CategoryID=1, Rank=Rank.F},
-                new Fetish{CustomerID=5, CategoryID=1, Rank=Rank.A},
-                new Fetish{CustomerID=5, CategoryID=5, Rank=Rank.B},
-                new Fetish{CustomerID=7, CategoryID=1, Rank=Rank.A},
-                new Fetish{CustomerID=7, CategoryID=2, Rank=Rank.F},
+                new Fetish{CustomerID=1, SubscriptionID=4, Rank=Rank.A},
+                new Fetish{CustomerID=1, SubscriptionID=3, Rank=Rank.B},
+                new Fetish{CustomerID=2, SubscriptionID=3, Rank=Rank.A},
+                new Fetish{CustomerID=3, SubscriptionID=1, Rank=Rank.A},
+                new Fetish{CustomerID=4, SubscriptionID=1, Rank=Rank.F},
+                new Fetish{CustomerID=5, SubscriptionID=1, Rank=Rank.A},
+                new Fetish{CustomerID=5, SubscriptionID=5, Rank=Rank.B},
+                new Fetish{CustomerID=7, SubscriptionID=1, Rank=Rank.A},
+                new Fetish{CustomerID=7, SubscriptionID=2, Rank=Rank.F},
             };
             foreach (Fetish f in fetishes)
             {

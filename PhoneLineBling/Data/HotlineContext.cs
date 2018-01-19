@@ -14,13 +14,13 @@ namespace PhoneLineBling.Data
         {
         }
 
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<Fetish> Fetishes { get; set; }
         public DbSet<Customer> Customers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Category>().ToTable("Category");
+            modelBuilder.Entity<Subscription>().ToTable("Subscription");
             modelBuilder.Entity<Fetish>().ToTable("Fetish");
             modelBuilder.Entity<Customer>().ToTable("Customer");
         }

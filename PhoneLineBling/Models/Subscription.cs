@@ -6,10 +6,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PhoneLineBling.Models
 {
-    public class Category
+    public class Subscription
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int CategoryID { get; set; }
+        public int SubscriptionID { get; set; }
         public string Title { get; set; }
         public int Followers { get; set; }
 
