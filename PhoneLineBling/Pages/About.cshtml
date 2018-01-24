@@ -1,9 +1,33 @@
 ﻿@page
-@model AboutModel
-@{
-    ViewData["Title"] = "About";
-}
-<h2>@ViewData["Title"]</h2>
-<h3>@Model.Message</h3>
+@model PhoneLineBling.Pages.AboutModel;
 
-<p>Use this area to provide additional information.</p>
+@{
+    ViewData["Title"] = "Customer Statistics";
+}
+
+<h2>Customer Statistics</h2>
+
+<table>
+    <tr>
+        <th>
+            Membership Plan
+        </th>
+        <th>
+            Customers
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Customer)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MembershipPlan)
+            </td>
+            <td>
+                @item.CustomerCount
+            </td>
+        </tr>
+
+    }
+
+</table>

@@ -19,11 +19,58 @@ namespace PhoneLineBling.Pages.Hotlines
             _context = context;
         }
 
-        public IList<Customer> Customer { get;set; }
+        public string NameSort { get; set; }
+        public string EmailSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
 
-        public async Task OnGetAsync()
+        public PaginatedList<Customer> Customer { get; set; }
+
+        public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex)
         {
-            Customer = await _context.Customers.ToListAsync();
+            CurrentSort = sortOrder;
+            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            EmailSort = sortOrder == "Email" ? "email_desc" : "Email";
+
+            if (searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            CurrentFilter = searchString;
+
+            IQueryable<Customer> customerIQ = from c in _context.Customers
+                                              select c;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                customerIQ = customerIQ.Where(c => c.LastName.Contains(searchString)
+                                        || c.FirstName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    customerIQ = customerIQ.OrderByDescending(c => c.FirstName);
+                    break;
+                case "Email":
+                    customerIQ = customerIQ.OrderBy(c => c.EmailAddress);
+                    break;
+                case "email_desc":
+                    customerIQ = customerIQ.OrderByDescending(c => c.EmailAddress);
+                    break;
+                default:
+                    customerIQ = customerIQ.OrderBy(c => c.FirstName);
+                    break;
+            }
+
+            int pageSize = 3;
+            Customer = await PaginatedList<Customer>.CreateAsync(
+                customerIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
         }
     }
 }

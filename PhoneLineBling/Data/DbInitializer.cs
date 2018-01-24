@@ -34,35 +34,35 @@ namespace PhoneLineBling.Data
             }
             context.SaveChanges();
 
-            var subscriptions = new Subscription[]
+            var fetishes = new Fetish[]
             {
-                new Subscription{SubscriptionID=1, Title="Look back at it"},
-                new Subscription{SubscriptionID=2, Title="Melons"},
-                new Subscription{SubscriptionID=3, Title="Game of thrones"},
-                new Subscription{SubscriptionID=4, Title="Far East"},
-                new Subscription{SubscriptionID=5, Title="Role Play"}
+                new Fetish{FetishID=1, Title="Look back at it"},
+                new Fetish{FetishID=2, Title="Melons"},
+                new Fetish{FetishID=3, Title="Game of thrones"},
+                new Fetish{FetishID=4, Title="Far East"},
+                new Fetish{FetishID=5, Title="Role Play"}
             };
-            foreach (Subscription c in subscriptions)
+            foreach (Fetish c in fetishes)
             {
-                context.Subscriptions.Add(c);
+                context.Fetishes.Add(c);
             }
             context.SaveChanges();
 
-            var fetishes = new Fetish[]
+            var subscriptions = new Subscription[]
             {
-                new Fetish{CustomerID=1, SubscriptionID=4, Rank=Rank.A},
-                new Fetish{CustomerID=1, SubscriptionID=3, Rank=Rank.B},
-                new Fetish{CustomerID=2, SubscriptionID=3, Rank=Rank.A},
-                new Fetish{CustomerID=3, SubscriptionID=1, Rank=Rank.A},
-                new Fetish{CustomerID=4, SubscriptionID=1, Rank=Rank.F},
-                new Fetish{CustomerID=5, SubscriptionID=1, Rank=Rank.A},
-                new Fetish{CustomerID=5, SubscriptionID=5, Rank=Rank.B},
-                new Fetish{CustomerID=7, SubscriptionID=1, Rank=Rank.A},
-                new Fetish{CustomerID=7, SubscriptionID=2, Rank=Rank.F},
+                new Subscription{CustomerID=1, SubscriptionID=4, Rank=Rank.MeSoHorny},
+                new Subscription{CustomerID=1, SubscriptionID=3, Rank=Rank.MeSoHorny},
+                new Subscription{CustomerID=2, SubscriptionID=3, Rank=Rank.MeSoHorny},
+                new Subscription{CustomerID=3, SubscriptionID=1, Rank=Rank.MeSoHorny},
+                new Subscription{CustomerID=4, SubscriptionID=1, Rank=Rank.NotMyThing},
+                new Subscription{CustomerID=5, SubscriptionID=1, Rank=Rank.MeSoHorny},
+                new Subscription{CustomerID=5, SubscriptionID=5, Rank=Rank.MeSoHorny},
+                new Subscription{CustomerID=7, SubscriptionID=1, Rank=Rank.MeSoHorny},
+                new Subscription{CustomerID=7, SubscriptionID=2, Rank=Rank.NotMyThing}
             };
-            foreach (Fetish f in fetishes)
+            foreach (Subscription f in subscriptions)
             {
-                context.Fetishes.Add(f);
+                context.Subscriptions.Add(f);
             }
             context.SaveChanges();
         }

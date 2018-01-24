@@ -47,6 +47,32 @@
         <dd>
             @Html.DisplayFor(model => model.Customer.MembershipPlan)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.Subscriptions)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>
+                        Fetish Title
+                    </th>
+                    <th>
+                        Rank
+                    </th>
+                </tr>
+                @foreach (var item in Model.Customer.Subscriptions)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fetish.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Rank)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
     </dl>
 </div>
 <div>

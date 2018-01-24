@@ -6,13 +6,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PhoneLineBling.Models
 {
+    public enum Rank
+    {
+        MeSoHorny, KeepGoing, NotMyThing
+    }
+
     public class Subscription
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SubscriptionID { get; set; }
-        public string Title { get; set; }
-        public int Followers { get; set; }
+        public int FetishID { get; set; }
+        public int CustomerID { get; set; }
+        public Rank? Rank { get; set; }
+        
+        public Fetish Fetish { get; set; }
+        public Customer Customer { get; set; }
 
-        public ICollection<Fetish> Fetishes { get; set; }
     }
 }

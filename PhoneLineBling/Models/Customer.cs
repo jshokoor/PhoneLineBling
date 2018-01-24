@@ -36,9 +36,8 @@ namespace PhoneLineBling.Models
         [StringLength(40, MinimumLength = 3)]
         [Required]
         public string MembershipPlan { get; set; }
-
-        [Display(Name = "Following")]    
-        public ICollection<Fetish> Fetishes { get; set; }
+    
+        public ICollection<Subscription> Subscriptions { get; set; }
 
     }
 }

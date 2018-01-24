@@ -34,10 +34,19 @@ namespace PhoneLineBling.Pages.Hotlines
                 return Page();
             }
 
-            _context.Customers.Add(Customer);
-            await _context.SaveChangesAsync();
+            var emptyCustomer = new Customer();
 
-            return RedirectToPage("./Index");
+            if (await TryUpdateModelAsync<Customer>(
+                emptyCustomer,
+                "customer",     //Prefix for form value.
+                s => s.FirstName, s => s.LastName, s => s.PhoneNumber, s => s.EmailAddress, s => s.SexualOrientation, s => s.MembershipPlan))
+            {
+                _context.Customers.Add(emptyCustomer);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+
+            return null;
         }
     }
 }

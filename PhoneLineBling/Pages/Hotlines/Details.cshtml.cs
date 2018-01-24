@@ -28,7 +28,11 @@ namespace PhoneLineBling.Pages.Hotlines
                 return NotFound();
             }
 
-            Customer = await _context.Customers.SingleOrDefaultAsync(m => m.ID == id);
+            Customer = await _context.Customers
+                                .Include(s => s.Subscriptions)
+                                    .ThenInclude(e => e.Fetish)
+                                    .AsNoTracking()
+                                    .FirstOrDefaultAsync(m => m.ID == id);
 
             if (Customer == null)
             {

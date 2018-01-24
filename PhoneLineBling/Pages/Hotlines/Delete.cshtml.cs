@@ -21,20 +21,29 @@ namespace PhoneLineBling.Pages.Hotlines
 
         [BindProperty]
         public Customer Customer { get; set; }
+        public string ErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Customer = await _context.Customers.SingleOrDefaultAsync(m => m.ID == id);
+            Customer = await _context.Customers
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
 
             if (Customer == null)
             {
                 return NotFound();
             }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ErrorMessage = "Delete failed. Try again.";
+            }
+
             return Page();
         }
 
@@ -45,15 +54,27 @@ namespace PhoneLineBling.Pages.Hotlines
                 return NotFound();
             }
 
-            Customer = await _context.Customers.FindAsync(id);
+            var customer = await _context.Customers
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Customer != null)
+            if (customer == null)
             {
-                _context.Customers.Remove(Customer);
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
 
-            return RedirectToPage("./Index");
+            try
+            {
+                _context.Customers.Remove(customer);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+            catch(DbUpdateException /* ex */)
+            {
+                //Log the error (uncomment ex variable name and write a log.)
+                return RedirectToAction("./Delete",
+                    new {  id, saveChangesError = true });
+            }
         }
     }
 }

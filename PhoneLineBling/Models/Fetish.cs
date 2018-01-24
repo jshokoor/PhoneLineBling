@@ -2,21 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PhoneLineBling.Models
 {
-    public enum Rank
-    {
-        A, B, C, D, F
-    }
     public class Fetish
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int FetishID { get; set; }
-        public int SubscriptionID { get; set; }
-        public int CustomerID { get; set; }
-        public Rank? Rank { get; set; }
+        public string Title { get; set; }
 
-        public Subscription Subscription { get; set; }
-        public Customer Customer { get; set; }
+        public ICollection<Subscription> Subscriptions { get; set; }
     }
 }

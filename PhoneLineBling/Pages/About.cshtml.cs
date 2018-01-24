@@ -3,16 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PhoneLineBling.Data;
+using PhoneLineBling.Models.HotlineViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace PhoneLineBling.Pages
 {
     public class AboutModel : PageModel
     {
-        public string Message { get; set; }
+        private readonly HotlineContext _context;
 
-        public void OnGet()
+        public AboutModel(HotlineContext context)
         {
-            Message = "Your application description page.";
+            _context = context;
+        }
+
+        public IList<MembershipPlanGroup> Customer { get; set; }
+
+        public async Task OnGetAsync()
+        {
+            IQueryable<MembershipPlanGroup> data =
+                from customer in _context.Customers
+                group customer by customer.MembershipPlan into planGroup
+                select new MembershipPlanGroup()
+                {
+                    MembershipPlan = planGroup.Key,
+                    CustomerCount = planGroup.Count()
+                };
+
+            Customer = await data.AsNoTracking().ToListAsync();
         }
     }
 }
